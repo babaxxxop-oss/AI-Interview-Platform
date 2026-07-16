@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Mock | Register</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/register.css') }}">
+
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                 alt="AI Mock Logo">
+
+        </div>
+
+        <!-- Heading -->
+
+        <h1>Create Account</h1>
+
+        <h2>Join AI Mock and start practicing.</h2>
+
+        <!-- Register Form -->
+
+        <form action="/register" method="POST">
+
+            <label for="username">Username</label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Choose a username"
+                required>
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required>
+
+            <label for="password">Password</label>
+
+            <div class="password-box">
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required>
+
+                <span id="togglePassword">👁️</span>
+
+            </div>
+
+            <label for="confirm_password">
+
+                Confirm Password
+
+            </label>
+
+            <div class="password-box">
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm your password"
+                    required>
+
+                <span id="toggleConfirmPassword">👁️</span>
+
+            </div>
+
+            <button type="submit">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <p>
+
+            Already have an account?
+
+            <a href="/login">
+
+                Login
+
+            </a>
+
+        </p>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,387 @@
+/* ==========================================
+   AI MOCK REGISTER PAGE
+========================================== */
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ==========================================
+   Body
+========================================== */
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:linear-gradient(135deg,#2563EB,#5B5FEF);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:30px;
+
+}
+
+/* ==========================================
+   Register Card
+========================================== */
+
+.register-container{
+
+    background:#ffffff;
+
+    width:500px;
+
+    max-width:100%;
+
+    padding:40px;
+
+    border-radius:22px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.18);
+
+    animation:fadeIn .7s ease;
+
+}
+
+/* ==========================================
+   Logo
+========================================== */
+
+.logo{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.logo img{
+
+    width:170px;
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+    transition:.3s ease;
+
+}
+
+.logo img:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ==========================================
+   Headings
+========================================== */
+
+h1{
+
+    text-align:center;
+
+    color:#1f2937;
+
+    font-size:44px;
+
+    margin-bottom:10px;
+
+}
+
+h2{
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:21px;
+
+    font-weight:500;
+
+    margin-bottom:35px;
+
+}
+
+/* ==========================================
+   Labels
+========================================== */
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#374151;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   Inputs
+========================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    margin-bottom:24px;
+
+    background:#f8fafc;
+
+    border:1px solid #dbe3ec;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+input::placeholder{
+
+    color:#9ca3af;
+
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus{
+
+    background:#ffffff;
+
+    border-color:#2563EB;
+
+    box-shadow:0 0 10px rgba(37,99,235,.20);
+
+}
+
+/* ==========================================
+   Password Box
+========================================== */
+
+.password-box{
+
+    position:relative;
+
+}
+
+.password-box input{
+
+    padding-right:55px;
+
+}
+
+/* First Eye */
+
+#togglePassword{
+
+    position:absolute;
+
+    top:38%;
+
+    right:18px;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    user-select:none;
+
+    transition:.2s;
+
+}
+
+#togglePassword:hover{
+
+    transform:translateY(-50%) scale(1.15);
+
+}
+
+/* Second Eye */
+
+#toggleConfirmPassword{
+
+    position:absolute;
+
+    top:38%;
+
+    right:18px;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    user-select:none;
+
+    transition:.2s;
+
+}
+
+#toggleConfirmPassword:hover{
+
+    transform:translateY(-50%) scale(1.15);
+
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+button{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#2563EB,#1D4ED8);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(37,99,235,.35);
+
+}
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+/* ==========================================
+   Bottom Text
+========================================== */
+
+.register-container p{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:16px;
+
+}
+
+.register-container p a{
+
+    color:#2563EB;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+.register-container p a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+   Animation
+========================================== */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:500px){
+
+    .register-container{
+
+        padding:30px;
+
+    }
+
+    h1{
+
+        font-size:34px;
+
+    }
+
+    h2{
+
+        font-size:18px;
+
+    }
+
+    .logo img{
+
+        width:130px;
+
+    }
+
+}

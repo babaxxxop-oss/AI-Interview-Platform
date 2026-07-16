@@ -2,29 +2,56 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Interview Practice Platform</title>
+    <title>AI Mock | Home</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 
 <body>
 
     <div class="container">
 
-        <h1>🤖 AI Interview Practice Platform</h1>
+        <div class="logo">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                 alt="AI Mock Logo">
+
+        </div>
+
+        <h1>AI Mock</h1>
 
         <p>
-            Practice HR, Python, Java, DSA, DBMS and AI interviews with AI.
+
+            Practice HR, Technical, Coding, Aptitude and AI-powered mock interviews.
+
+        </p>
+
+        <p>
+
+            <strong>Practice. Improve. Get Hired.</strong>
+
         </p>
 
         <a href="/interview">
-    <button>🚀 Start Interview</button></a>
 
-    <a href="/login">Login</a>
+            <button>🚀 Start Interview</button>
+
+        </a>
+
+        <br><br>
+
+        <a href="/login">
+
+            <button>🔐 Login</button>
+
+        </a>
 
     </div>
 

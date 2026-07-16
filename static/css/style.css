@@ -1,78 +1,217 @@
-/* Style the whole webpage */
-body {
-    margin: 0;
-    padding: 0;
+/* ==========================================
+   AI Mock Home Page
+========================================== */
 
-    /* Background color */
-    background: #87CEEB;
+/* Reset */
 
-    /* Font */
-    font-family: Arial, Helvetica, sans-serif;
-
-    /* Center everything */
-    display: flex;
-    justify-content: center;   /* Horizontal center */
-    align-items: center;       /* Vertical center */
-
-    /* Full screen height */
-    height: 100vh;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* White box */
-.container {
-    width: 500px;
+/* ==========================================
+   Body
+========================================== */
 
-    background: white;
+body{
 
-    padding: 40px;
+    font-family:Arial, Helvetica, sans-serif;
 
-    border-radius: 15px;
+    background:linear-gradient(135deg,#2563EB,#7C3AED);
 
-    text-align: center;
+    display:flex;
 
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:30px;
+
 }
 
-/* Heading */
-h1 {
-    font-size: 42px;
-    color: #1f2937;
+/* ==========================================
+   Main Container
+========================================== */
 
-    margin-bottom: 20px;
+.container{
+
+    width:550px;
+
+    max-width:100%;
+
+    background:white;
+
+    padding:50px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.20);
+
+    animation:fadeIn .7s ease;
+
 }
 
-/* Paragraph */
-p {
-    font-size: 20px;
-    color: #555;
+/* ==========================================
+   Logo
+========================================== */
 
-    line-height: 1.6;
+.logo{
 
-    margin-bottom: 30px;
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:25px;
+
 }
 
-/* Button */
-button {
-    background: #2563eb;
+.logo img{
 
-    color: white;
+    width:220px;
 
-    border: none;
+    max-width:100%;
 
-    padding: 15px 30px;
+    height:auto;
 
-    font-size: 20px;
+    display:block;
 
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
 }
 
-/* Button hover */
-button:hover {
-    background: #1d4ed8;
+/* ==========================================
+   Heading
+========================================== */
 
-    transform: scale(1.05);
+h1{
+
+    font-size:46px;
+
+    color:#1f2937;
+
+    margin-bottom:15px;
+
+}
+
+/* ==========================================
+   Paragraph
+========================================== */
+
+p{
+
+    font-size:20px;
+
+    color:#6b7280;
+
+    line-height:1.6;
+
+    margin-bottom:18px;
+
+}
+
+/* ==========================================
+   Tagline
+========================================== */
+
+.tagline{
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    color:#2563EB;
+
+    margin-bottom:35px;
+
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+button{
+
+    width:100%;
+
+    padding:16px;
+
+    background:linear-gradient(90deg,#2563EB,#1D4ED8);
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(37,99,235,.35);
+
+}
+
+/* ==========================================
+   Login Link
+========================================== */
+
+.login-link{
+
+    margin-top:25px;
+
+}
+
+.login-link a{
+
+    text-decoration:none;
+
+    color:#2563EB;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.login-link a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+   Animation
+========================================== */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
 }
