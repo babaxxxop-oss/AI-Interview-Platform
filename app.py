@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 import sqlite3
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Create the Flask application
 app = Flask(__name__)
+app.secret_key = "my_super_secret_key_2026"
 
 # Secret key for flash messages and sessions
 app.secret_key = "ai_mock_secret_key"
+
 
 # --------------------------
 # Home Page Route
@@ -20,8 +23,12 @@ def home():
 # --------------------------
 @app.route("/interview")
 def interview():
-    return render_template("interview.html")
 
+    if "username" not in session:
+        flash("Please login first!", "warning")
+        return redirect(url_for("login"))
+
+    return render_template("interview.html")
 
 # --------------------------
 # LOGIN PAGE ROUTE
@@ -34,10 +41,38 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        print("Username:", username)
-        print("Password:", password)
+        connection = sqlite3.connect("database/users.db")
+        cursor = connection.cursor()
+
+        cursor.execute(
+            "SELECT * FROM users WHERE username = ?",
+            (username,)
+        )
+
+        user = cursor.fetchone()
+        if user:
+            if check_password_hash(user[3], password):
+                # Store username in session
+                session["username"] = user[1]
+                flash("Login Successful!", "success")
+                return redirect(url_for("interview"))
+            else:
+                 flash("Incorrect Password!", "danger")
+        else:
+            flash("Username does not exist!", "danger")
+        
 
     return render_template("login.html")
+
+#LOGOUT ROUTE 
+@app.route("/logout")
+def logout():
+
+    session.pop("username", None)
+
+    flash("Logged out successfully!", "success")
+
+    return redirect(url_for("login"))
 
 
 # --------------------------
@@ -52,6 +87,7 @@ def register():
         email = request.form["email"]
         password = request.form["password"]
         confirm_password = request.form["confirm_password"]
+        hashed_password = generate_password_hash(password)
 
         # --------------------------
         # Check if passwords match
@@ -104,7 +140,7 @@ def register():
             INSERT INTO users (username, email, password)
             VALUES (?, ?, ?)
             """,
-            (username, email, password)
+            (username, email, hashed_password)
         )
 
         connection.commit()
