@@ -116,7 +116,51 @@ h2{
 
     font-weight:500;
 
-    margin-bottom:35px;
+    margin-bottom:25px;
+
+}
+
+/* ==========================================
+   Flash Messages
+========================================== */
+
+.flash-message{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:25px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    animation:flashFade .35s ease;
+
+}
+
+.flash-message.success{
+
+    background:#d1fae5;
+
+    color:#065f46;
+
+    border:1px solid #10b981;
+
+}
+
+.flash-message.danger{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border:1px solid #ef4444;
 
 }
 
@@ -200,36 +244,7 @@ input[type="password"]:focus{
 
 }
 
-/* First Eye */
-
-#togglePassword{
-
-    position:absolute;
-
-    top:38%;
-
-    right:18px;
-
-    transform:translateY(-50%);
-
-    cursor:pointer;
-
-    font-size:20px;
-
-    user-select:none;
-
-    transition:.2s;
-
-}
-
-#togglePassword:hover{
-
-    transform:translateY(-50%) scale(1.15);
-
-}
-
-/* Second Eye */
-
+#togglePassword,
 #toggleConfirmPassword{
 
     position:absolute;
@@ -250,6 +265,7 @@ input[type="password"]:focus{
 
 }
 
+#togglePassword:hover,
 #toggleConfirmPassword:hover{
 
     transform:translateY(-50%) scale(1.15);
@@ -331,7 +347,7 @@ button:active{
 }
 
 /* ==========================================
-   Animation
+   Animations
 ========================================== */
 
 @keyframes fadeIn{
@@ -354,11 +370,37 @@ button:active{
 
 }
 
+@keyframes flashFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
 /* ==========================================
    Responsive
 ========================================== */
 
 @media(max-width:500px){
+
+    body{
+
+        padding:20px;
+
+    }
 
     .register-container{
 
@@ -384,4 +426,29 @@ button:active{
 
     }
 
+}
+
+/* ==========================================
+   Footer
+========================================== */
+
+.footer{
+    margin-top:30px;
+    padding-top:18px;
+    border-top:1px solid #e5e7eb;
+    text-align:center;
+    font-size:13px;
+    color:#6b7280;
+    line-height:1.6;
+    letter-spacing:0.3px;
+}
+
+.footer strong{
+    color:#2563EB;
+    font-weight:700;
+}
+
+.footer:hover{
+    color:#374151;
+    transition:0.3s;
 }
