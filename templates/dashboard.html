@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<!-- Flash Messages -->
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
@@ -21,46 +22,81 @@
 
 <div class="container">
 
+    <!-- Top Bar -->
     <div class="top-bar">
+
         <h1>AI Mock</h1>
 
-        <a href="{{ url_for('logout') }}" class="logout-btn">
-            Logout
+        <a href="{{ url_for('auth.logout') }}" class="logout-btn">
+            🚪 Logout
         </a>
+
     </div>
 
+    <!-- Welcome -->
     <div class="welcome-box">
+
         <h2>Welcome Back, {{ username }} 👋</h2>
 
         <p>
             Ready to crack your next interview?
         </p>
+
     </div>
 
+    <!-- Cards -->
     <div class="card-container">
 
-        <a href="{{ url_for('setup') }}" class="card">
+        <!-- Start Interview -->
+        <a href="{{ url_for('interview.setup') }}" class="card">
+
             <div class="icon">🎤</div>
+
             <h3>Start AI Interview</h3>
-            <p>Practice with AI and improve your skills.</p>
+
+            <p>
+                Practice with AI and improve your skills.
+            </p>
+
         </a>
 
+        <!-- Resume -->
         <div class="card">
+
             <div class="icon">📄</div>
+
             <h3>Resume Analyzer</h3>
-            <p>Coming Soon</p>
+
+            <p>
+                Coming Soon
+            </p>
+
         </div>
 
-        <div class="card">
+        <!-- History -->
+        <a href="{{ url_for('history.history') }}" class="card">
+
             <div class="icon">📊</div>
-            <h3>Interview History</h3>
-            <p>Coming Soon</p>
-        </div>
 
+            <h3>Interview History</h3>
+
+            <p>
+                View all your previous interviews.
+            </p>
+
+        </a>
+
+        <!-- Profile -->
         <div class="card">
+
             <div class="icon">👤</div>
+
             <h3>My Profile</h3>
-            <p>Coming Soon</p>
+
+            <p>
+                Coming Soon
+            </p>
+
         </div>
 
     </div>
@@ -75,15 +111,11 @@ setTimeout(() => {
     if (flash) {
 
         flash.style.transition = "all 0.5s ease";
-
         flash.style.opacity = "0";
-
         flash.style.transform = "translateX(40px)";
 
         setTimeout(() => {
-
             flash.remove();
-
         }, 500);
 
     }

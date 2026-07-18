@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Interview Details</title>
+</head>
+
+<body>
+
+<h1>Interview Details</h1>
+
+<p><strong>Category:</strong> {{ category }}</p>
+<p><strong>Difficulty:</strong> {{ difficulty }}</p>
+<p><strong>Date:</strong> {{ date }}</p>
+
+<hr>
+
+{% for i in range(questions|length) %}
+
+<h3>Question {{ i+1 }}</h3>
+
+<p>{{ questions[i] }}</p>
+
+<strong>Your Answer:</strong>
+
+<p>{{ answers[i] }}</p>
+
+<hr>
+
+{% endfor %}
+
+<a href="/history">⬅ Back to History</a>
+
+</body>
+
+</html>
