@@ -1,0 +1,202 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:linear-gradient(135deg,#667eea,#764ba2);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+}
+
+.container{
+
+    width:100%;
+    max-width:1200px;
+
+    background:rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.top-bar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+
+.top-bar h1{
+
+    color:white;
+
+    font-size:40px;
+
+    font-weight:bold;
+}
+
+.logout-btn{
+
+    text-decoration:none;
+
+    background:#ff4d4d;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.logout-btn:hover{
+
+    background:#e60000;
+
+    transform:scale(1.05);
+}
+
+.welcome-box{
+
+    color:white;
+
+    margin-bottom:40px;
+}
+
+.welcome-box h2{
+
+    font-size:36px;
+
+    margin-bottom:10px;
+}
+
+.welcome-box p{
+
+    opacity:.9;
+
+    font-size:18px;
+}
+
+.card-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+}
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-decoration:none;
+
+    color:#333;
+
+    transition:.35s;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.icon{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+}
+
+.card h3{
+
+    margin-bottom:10px;
+
+    color:#444;
+}
+
+.card p{
+
+    color:#666;
+}
+
+@media(max-width:700px){
+
+    .top-bar{
+
+        flex-direction:column;
+
+        gap:20px;
+    }
+
+    .welcome-box h2{
+
+        font-size:28px;
+    }
+
+}
+
+.flash{
+
+    position: fixed;
+
+    top: 25px;
+
+    right: 25px;
+
+    min-width: 300px;
+
+    padding: 15px 25px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-weight: bold;
+
+    z-index: 9999;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.3);
+}
+
+.success{
+    background:#28a745;
+}
+
+.danger{
+    background:#dc3545;
+}
+
+.warning{
+    background:#ffc107;
+    color:black;
+}

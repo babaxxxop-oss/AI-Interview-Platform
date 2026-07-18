@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container">
+
+    <div class="top-bar">
+        <h1>AI Mock</h1>
+
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+            Logout
+        </a>
+    </div>
+
+    <div class="welcome-box">
+        <h2>Welcome Back, {{ username }} 👋</h2>
+
+        <p>
+            Ready to crack your next interview?
+        </p>
+    </div>
+
+    <div class="card-container">
+
+        <a href="{{ url_for('setup') }}" class="card">
+            <div class="icon">🎤</div>
+            <h3>Start AI Interview</h3>
+            <p>Practice with AI and improve your skills.</p>
+        </a>
+
+        <div class="card">
+            <div class="icon">📄</div>
+            <h3>Resume Analyzer</h3>
+            <p>Coming Soon</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📊</div>
+            <h3>Interview History</h3>
+            <p>Coming Soon</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">👤</div>
+            <h3>My Profile</h3>
+            <p>Coming Soon</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+setTimeout(() => {
+
+    const flash = document.querySelector(".flash");
+
+    if (flash) {
+
+        flash.style.transition = "all 0.5s ease";
+
+        flash.style.opacity = "0";
+
+        flash.style.transform = "translateX(40px)";
+
+        setTimeout(() => {
+
+            flash.remove();
+
+        }, 500);
+
+    }
+
+}, 3000);
+</script>
+
+</body>
+</html>

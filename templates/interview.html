@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock - Interview</title>
 
-    <title>Interview Page</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/interview.css') }}">
 </head>
-
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>🎤 AI Interview</h1>
+    <!-- Header -->
+    <div class="header">
 
-        <p>
-            Welcome to the Interview Practice Page.
-        </p>
+        <h1>🎤 AI Mock Interview</h1>
 
-        <a href="/">
-            <button>⬅ Back to Home</button>
+        <a href="{{ url_for('dashboard') }}" class="back-btn">
+            ← Dashboard
         </a>
 
     </div>
 
-</body>
+    <!-- Interview Form -->
+    <form class="interview-box" method="POST">
 
+        <!-- Interview Info -->
+        <div class="info">
+
+            <span>Category : HR Interview</span>
+
+            <span>Difficulty : Beginner</span>
+
+        </div>
+
+        <!-- Progress -->
+        <div class="progress">
+
+            Question {{ question_number }} of {{ total_questions }}
+
+        </div>
+
+        <!-- Question -->
+        <div class="question">
+
+            <h2><h2>{{ question }}</h2></h2>
+
+        </div>
+
+        <!-- Answer -->
+        <div class="answer">
+
+            <textarea
+                name="answer"
+                placeholder="Type your answer here..."
+                required
+            ></textarea>
+
+        </div>
+
+        <!-- Next Button -->
+        <button type="submit" class="next-btn">
+
+            Next Question →
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
 </html>
