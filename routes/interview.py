@@ -2,7 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 import json
 
 from database.db import get_db_connection
-from data.questions import QUESTIONS
+from services.ai_service import chat_with_ai
+
 interview_bp = Blueprint("interview", __name__)
 
 
@@ -23,8 +24,26 @@ def setup():
         session["difficulty"] = request.form["difficulty"]
         session["num_questions"] = int(request.form["num_questions"])
 
-        session.pop("question_index", None)
-        session.pop("answers", None)
+        # Start AI Conversation
+        session["chat_history"] = [
+            {
+                "role": "user",
+                "content": f"""
+Start a professional interview.
+
+Category: {session['category']}
+Difficulty: {session['difficulty']}
+
+Introduce yourself briefly.
+
+Then ask ONLY the FIRST interview question.
+
+Do not ask multiple questions.
+"""
+            }
+        ]
+
+        session["question_number"] = 1
 
         return redirect(url_for("interview.interview"))
 
@@ -42,68 +61,100 @@ def interview():
         flash("Please login first!", "warning")
         return redirect(url_for("auth.login"))
 
-    if "category" not in session:
-        flash("Please setup your interview first!", "warning")
+    if "chat_history" not in session:
+        flash("Please setup interview first!", "warning")
         return redirect(url_for("interview.setup"))
 
-    if "question_index" not in session:
-        session["question_index"] = 0
-        session["answers"] = []
+    # -----------------------------
+    # FIRST QUESTION
+    # -----------------------------
+    if len(session["chat_history"]) == 1:
 
-    selected_questions = QUESTIONS[
-        session["category"]
-    ][:session["num_questions"]]
+        ai_question = chat_with_ai(session["chat_history"])
 
+        session["chat_history"].append(
+            {
+                "role": "assistant",
+                "content": ai_question
+            }
+        )
+
+        session.modified = True
+
+    # -----------------------------
+    # USER ANSWERS
+    # -----------------------------
     if request.method == "POST":
 
         answer = request.form["answer"]
 
-        session["answers"].append(answer)
+        session["chat_history"].append(
+            {
+                "role": "user",
+                "content": answer
+            }
+        )
 
-        session["question_index"] += 1
+        session["question_number"] += 1
 
-    if session["question_index"] >= len(selected_questions):
+        # Interview Finished?
+        if session["question_number"] > session["num_questions"]:
 
-        questions_json = json.dumps(selected_questions)
-        answers_json = json.dumps(session["answers"])
+            connection = get_db_connection()
+            cursor = connection.cursor()
 
-        connection = get_db_connection()
-        cursor = connection.cursor()
+            cursor.execute("""
+                INSERT INTO interviews
+                (username, category, difficulty, questions, answers, score, date)
+                VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+            """, (
 
-        cursor.execute("""
-            INSERT INTO interviews
-            (username, category, difficulty, questions, answers, score, date)
-            VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
-        """, (
-            session["username"],
-            session["category"],
-            session["difficulty"],
-            questions_json,
-            answers_json,
-            None
-        ))
+                session["username"],
+                session["category"],
+                session["difficulty"],
+                json.dumps(session["chat_history"]),
+                json.dumps(session["chat_history"]),
+                None
 
-        connection.commit()
-        connection.close()
+            ))
 
-        total_answers = len(session["answers"])
+            connection.commit()
+            connection.close()
 
-        session.pop("question_index", None)
-        session.pop("answers", None)
+            session.pop("chat_history", None)
+            session.pop("question_number", None)
 
-        return f"""
-        <h1>🎉 Interview Completed!</h1>
-        <h2>You answered {total_answers} questions.</h2>
-        <p>Your interview has been saved successfully.</p>
-        <br>
-        <a href="{url_for('main.dashboard')}">Back to Dashboard</a>
-        """
+            return """
+            <h1>🎉 Interview Completed!</h1>
 
-    current_index = session["question_index"]
+            <p>Your interview has been saved.</p>
+
+            <a href="/dashboard">
+                Back to Dashboard
+            </a>
+            """
+
+        ai_question = chat_with_ai(session["chat_history"])
+
+        session["chat_history"].append(
+            {
+                "role": "assistant",
+                "content": ai_question
+            }
+        )
+
+        session.modified = True
+
+    current_question = session["chat_history"][-1]["content"]
 
     return render_template(
+
         "interview.html",
-        question=selected_questions[current_index],
-        question_number=current_index + 1,
-        total_questions=len(selected_questions)
+
+        question=current_question,
+
+        question_number=session["question_number"],
+
+        total_questions=session["num_questions"]
+
     )

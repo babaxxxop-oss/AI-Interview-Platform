@@ -1,40 +1,843 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interview Setup - AI Mock</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>AI Mock Interview Setup</h1>
+{% block title %}AI Mock | Interview Setup{% endblock %}
 
-    <form method="POST">
+{% block extra_css %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        <h3>Interview Category</h3>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        <input type="radio" name="category" value="HR" checked> HR<br>
-        <input type="radio" name="category" value="Python"> Python<br>
-        <input type="radio" name="category" value="Java"> Java<br>
-        <input type="radio" name="category" value="DSA"> DSA<br>
-        <input type="radio" name="category" value="DBMS"> DBMS<br>
-        <input type="radio" name="category" value="AI/ML"> AI/ML<br><br>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/setup.css') }}">
+{% endblock %}
 
-        <h3>Difficulty</h3>
+{% block content %}
 
-        <input type="radio" name="difficulty" value="Beginner" checked> Beginner<br>
-        <input type="radio" name="difficulty" value="Intermediate"> Intermediate<br>
-        <input type="radio" name="difficulty" value="Advanced"> Advanced<br><br>
+<div class="background-blur blur-one"></div>
+<div class="background-blur blur-two"></div>
 
-        <h3>Number of Questions</h3>
+<div class="page">
 
-        <input type="radio" name="num_questions" value="5"> 5<br>
-        <input type="radio" name="num_questions" value="10" checked> 10<br>
-        <input type="radio" name="num_questions" value="20"> 20<br><br>
+<!-- =======================
+        TOP NAVBAR
+======================== -->
 
-        <button type="submit">Start Interview</button>
+<header class="topbar">
 
-    </form>
+<div class="logo-area">
 
-</body>
-</html>
+<div class="logo-box">
+🤖
+</div>
+
+<div>
+
+<h1 class="brand-title">
+AI Mock
+</h1>
+
+<p class="brand-subtitle">
+AI Powered Interview Platform
+</p>
+
+</div>
+
+</div>
+
+
+<div class="top-icons">
+
+<button class="icon-button">
+
+🔔
+
+</button>
+
+<div class="user">
+
+<div class="avatar">
+
+S
+
+</div>
+
+<div>
+
+<h3>
+Shubham
+</h3>
+
+<p>
+Premium
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- =======================
+        MAIN LAYOUT
+======================== -->
+
+<form method="POST">
+
+<div class="layout">
+
+<!-- ==========================
+        LEFT PANEL
+========================== -->
+
+<section class="left-panel">
+
+
+<!-- ==========================
+    CATEGORY SECTION
+========================== -->
+
+<div class="section">
+
+<div class="section-header">
+
+<h2>
+
+Choose Interview Category
+
+</h2>
+
+<p>
+
+Select the interview type you want to practice.
+
+</p>
+
+</div>
+
+
+
+<div class="category-grid">
+
+
+
+<label class="category-card active">
+
+<input
+type="radio"
+name="category"
+value="hr"
+checked
+>
+
+<div class="card-icon">
+
+💼
+
+</div>
+
+<div class="card-text">
+
+<h3>
+
+HR Interview
+
+</h3>
+
+<p>
+
+Behavioral, Communication & Confidence
+
+</p>
+
+</div>
+
+<div class="check">
+
+✓
+
+</div>
+
+</label>
+
+
+
+
+
+<label class="category-card">
+
+<input
+type="radio"
+name="category"
+value="python"
+>
+
+<div class="card-icon">
+
+🐍
+
+</div>
+
+<div class="card-text">
+
+<h3>
+
+Python
+
+</h3>
+
+<p>
+
+Core Python + OOP + Coding
+
+</p>
+
+</div>
+
+<div class="check">
+
+✓
+
+</div>
+
+</label>
+
+
+
+
+
+<label class="category-card">
+
+<input
+type="radio"
+name="category"
+value="java"
+>
+
+<div class="card-icon">
+
+☕
+
+</div>
+
+<div class="card-text">
+
+<h3>
+
+Java
+
+</h3>
+
+<p>
+
+Core Java + Collections
+
+</p>
+
+</div>
+
+<div class="check">
+
+✓
+
+</div>
+
+</label>
+
+
+
+
+
+<label class="category-card">
+
+<input
+type="radio"
+name="category"
+value="dsa"
+>
+
+<div class="card-icon">
+
+💻
+
+</div>
+
+<div class="card-text">
+
+<h3>
+
+Data Structures
+
+</h3>
+
+<p>
+
+Coding Interview Questions
+
+</p>
+
+</div>
+
+<div class="check">
+
+✓
+
+</div>
+
+</label>
+
+
+
+
+
+<label class="category-card">
+
+<input
+type="radio"
+name="category"
+value="dbms"
+>
+
+<div class="card-icon">
+
+🗄️
+
+</div>
+
+<div class="card-text">
+
+<h3>
+
+DBMS
+
+</h3>
+
+<p>
+
+SQL + Database Concepts
+
+</p>
+
+</div>
+
+<div class="check">
+
+✓
+
+</div>
+
+</label>
+
+
+
+
+
+<label class="category-card">
+
+<input
+type="radio"
+name="category"
+value="aiml"
+>
+
+<div class="card-icon">
+
+🤖
+
+</div>
+
+<div class="card-text">
+
+<h3>
+
+AI / ML
+
+</h3>
+
+<p>
+
+Machine Learning Interview
+
+</p>
+
+</div>
+
+<div class="check">
+
+✓
+
+</div>
+
+</label>
+
+</div>
+
+</div>
+
+<!-- ==========================
+DIFFICULTY + QUESTIONS
+========================== -->
+
+<div class="section">
+
+<div class="settings-grid">
+
+<!-- Difficulty -->
+
+<div>
+
+<div class="section-header">
+
+<h2>Difficulty</h2>
+
+<p>Choose interview complexity.</p>
+
+</div>
+
+<div class="difficulty-row">
+
+<label class="difficulty-card easy active">
+
+<input
+type="radio"
+name="difficulty"
+value="easy"
+checked>
+
+🟢 Easy
+
+</label>
+
+<label class="difficulty-card medium">
+
+<input
+type="radio"
+name="difficulty"
+value="medium">
+
+🟡 Medium
+
+</label>
+
+<label class="difficulty-card hard">
+
+<input
+type="radio"
+name="difficulty"
+value="hard">
+
+🔴 Hard
+
+</label>
+
+</div>
+
+</div>
+
+
+
+<!-- Questions -->
+
+<div>
+
+<div class="section-header">
+
+<h2>Questions</h2>
+
+<p>Interview length.</p>
+
+</div>
+
+<input
+type="range"
+min="5"
+max="20"
+value="10"
+name="num_questions"
+id="questionSlider">
+
+<div class="slider-footer">
+
+<span>5</span>
+
+<strong id="questionCount">
+
+10 Questions
+
+</strong>
+
+<span>20</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================
+        AI FEATURES
+========================== -->
+
+<div class="section">
+
+    <div class="section-header">
+
+        <h2>
+            AI Features
+        </h2>
+
+        <p>
+            Enable smart interview capabilities.
+        </p>
+
+    </div>
+
+    <div class="feature-grid">
+
+        <label class="feature-card active">
+
+            <input
+                type="checkbox"
+                name="resume"
+                checked
+            >
+
+            <div class="feature-icon">
+                📄
+            </div>
+
+            <div>
+
+                <h3>
+                    Resume Analysis
+                </h3>
+
+                <p>
+                    Personalize interview questions
+                </p>
+
+            </div>
+
+        </label>
+
+
+
+        <label class="feature-card active">
+
+            <input
+                type="checkbox"
+                name="voice"
+                checked
+            >
+
+            <div class="feature-icon">
+                🎤
+            </div>
+
+            <div>
+
+                <h3>
+                    Voice Interview
+                </h3>
+
+                <p>
+                    Speak answers naturally
+                </p>
+
+            </div>
+
+        </label>
+
+
+
+        <label class="feature-card">
+
+            <input
+                type="checkbox"
+                name="camera"
+            >
+
+            <div class="feature-icon">
+                📷
+            </div>
+
+            <div>
+
+                <h3>
+                    Camera Analysis
+                </h3>
+
+                <p>
+                    Analyze confidence & posture
+                </p>
+
+            </div>
+
+        </label>
+
+
+
+        <label class="feature-card active">
+
+            <input
+                type="checkbox"
+                name="feedback"
+                checked
+            >
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h3>
+                    Instant Feedback
+                </h3>
+
+                <p>
+                    AI evaluates every answer
+                </p>
+
+            </div>
+
+        </label>
+
+    </div>
+
+</div>
+
+
+
+<div class="section">
+
+<button
+type="submit"
+class="start-button">
+
+🚀 Start AI Interview
+
+</button>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- ==========================
+        RIGHT PANEL
+========================== -->
+
+<aside class="right-panel">
+
+<div class="ai-card">
+
+<div class="ai-avatar">
+
+🤖
+
+</div>
+
+<h2>
+
+Nova AI
+
+</h2>
+
+<p>
+
+Senior Technical Interviewer
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="preview-card">
+
+<h3>
+
+Interview Preview
+
+</h3>
+
+<div class="preview-row">
+
+<span>
+
+Category
+
+</span>
+
+<strong id="previewCategory">
+
+HR Interview
+
+</strong>
+
+</div>
+
+<div class="preview-row">
+
+<span>
+
+Difficulty
+
+</span>
+
+<strong id="previewDifficulty">
+
+Easy
+
+</strong>
+
+</div>
+
+<div class="preview-row">
+
+<span>
+
+Questions
+
+</span>
+
+<strong id="previewQuestions">
+
+10
+
+</strong>
+
+</div>
+
+<div class="preview-row">
+
+<span>
+
+Estimated Time
+
+</span>
+
+<strong id="previewDuration">
+
+15 min
+
+</strong>
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="status-card">
+
+<h3>
+
+AI Capabilities
+
+</h3>
+
+<div class="status-item">
+
+✅ AI Generated Questions
+
+</div>
+
+<div class="status-item">
+
+✅ Resume Based Interview
+
+</div>
+
+<div class="status-item">
+
+✅ Voice Recognition
+
+</div>
+
+<div class="status-item">
+
+✅ Performance Score
+
+</div>
+
+<div class="status-item">
+
+✅ Communication Analysis
+
+</div>
+
+<div class="status-item">
+
+✅ Personalized Feedback
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="tips-card">
+
+<h3>
+
+💡 Interview Tips
+
+</h3>
+
+<ul>
+
+<li>
+Speak confidently.
+</li>
+
+<li>
+Think before answering.
+</li>
+
+<li>
+Use real-life examples.
+</li>
+
+<li>
+Maintain good communication.
+</li>
+
+<li>
+Stay calm throughout the interview.
+</li>
+
+</ul>
+
+</div>
+
+</aside>
+
+</div>
+
+</form>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/setup.js') }}"></script>
+{% endblock %}

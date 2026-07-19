@@ -26,6 +26,13 @@
         {% endblock %}
     </title>
 
+    <script>
+        // Shared theme state: apply before the page is painted.
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
     <!-- ==========================================
          Google Fonts
     =========================================== -->
@@ -53,6 +60,9 @@
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/output.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/theme-transition.css') }}">
 
     <!-- ==========================================
          Extra Page CSS

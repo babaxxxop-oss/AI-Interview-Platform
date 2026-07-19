@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Mock - Interview</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/interview.css') }}">
+    <title>AI Mock | Interview</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/interview.css') }}">
+
 </head>
+
 <body>
 
 <div class="container">
@@ -22,15 +28,21 @@
 
     </div>
 
-    <!-- Interview Form -->
-    <form class="interview-box" method="POST">
+    <!-- Interview Box -->
+    <form method="POST" class="interview-box">
 
-        <!-- Interview Info -->
+        <!-- Interview Details -->
         <div class="info">
 
-            <span>Category : HR Interview</span>
+            <span>
+                <strong>Category:</strong>
+                {{ session.category }}
+            </span>
 
-            <span>Difficulty : Beginner</span>
+            <span>
+                <strong>Difficulty:</strong>
+                {{ session.difficulty }}
+            </span>
 
         </div>
 
@@ -41,28 +53,34 @@
 
         </div>
 
-        <!-- Question -->
+        <!-- AI Question -->
         <div class="question">
 
-            <h2><h2>{{ question }}</h2></h2>
+            <h2>{{ question }}</h2>
 
         </div>
 
-        <!-- Answer -->
+        <!-- User Answer -->
         <div class="answer">
 
             <textarea
                 name="answer"
+                rows="8"
                 placeholder="Type your answer here..."
                 required
+                autofocus
             ></textarea>
 
         </div>
 
-        <!-- Next Button -->
-        <button type="submit" class="next-btn">
+        <!-- Submit -->
+        <button class="next-btn" type="submit">
 
-            Next Question →
+            {% if question_number == total_questions %}
+                Finish Interview ✅
+            {% else %}
+                Next Question →
+            {% endif %}
 
         </button>
 
@@ -71,4 +89,5 @@
 </div>
 
 </body>
+
 </html>
