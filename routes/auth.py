@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from database.db import get_db_connection
 
 auth_bp = Blueprint("auth", __name__)
 
-
-# ==========================
+# ==================================================
 # Login
-# ==========================
+# ==================================================
+
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -16,7 +17,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        connection = sqlite3.connect("database/users.db")
+        connection = get_db_connection()
         cursor = connection.cursor()
 
         cursor.execute(
@@ -25,13 +26,14 @@ def login():
         )
 
         user = cursor.fetchone()
+
         connection.close()
 
         if user:
 
-            if check_password_hash(user[3], password):
+            if check_password_hash(user["password"], password):
 
-                session["username"] = user[1]
+                session["username"] = user["username"]
 
                 flash("Login Successful!", "success")
 
@@ -48,9 +50,10 @@ def login():
     return render_template("login.html")
 
 
-# ==========================
+# ==================================================
 # Logout
-# ==========================
+# ==================================================
+
 @auth_bp.route("/logout")
 def logout():
 
@@ -61,9 +64,10 @@ def logout():
     return redirect(url_for("auth.login"))
 
 
-# ==========================
+# ==================================================
 # Register
-# ==========================
+# ==================================================
+
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -82,7 +86,7 @@ def register():
 
         hashed_password = generate_password_hash(password)
 
-        connection = sqlite3.connect("database/users.db")
+        connection = get_db_connection()
         cursor = connection.cursor()
 
         cursor.execute(

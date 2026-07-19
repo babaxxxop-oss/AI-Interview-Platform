@@ -1,127 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Mock Dashboard</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-</head>
-<body>
+{% block title %}Dashboard | AI Mock{% endblock %}
 
-<!-- Flash Messages -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            <div class="flash {{ category }}">
-                {{ message }}
+{% block content %}
+
+<!-- ==========================================================
+     AI Mock Dashboard
+========================================================== -->
+
+<div class="min-h-screen bg-gray-100 dark:bg-slate-950 transition-colors duration-300">
+
+    <!-- Sidebar -->
+    {% include "components/sidebar/sidebar.html" %}
+
+    <!-- Main Content -->
+    <main class="ml-72 min-h-screen">
+
+        <!-- Navbar -->
+        {% include "components/navbar.html" %}
+
+        <!-- Dashboard Content -->
+        <div class="p-8 space-y-8">
+
+            <!-- Welcome Section -->
+            {% include "components/hero.html" %}
+
+            <!-- Feature Cards -->
+            {% include "components/stat_cards.html" %}
+
+            <!-- Bottom Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- Recent Activity -->
+                {% include "components/activity.html" %}
+
+                <!-- Overview -->
+                {% include "components/charts.html" %}
+
             </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
-<div class="container">
-
-    <!-- Top Bar -->
-    <div class="top-bar">
-
-        <h1>AI Mock</h1>
-
-        <a href="{{ url_for('auth.logout') }}" class="logout-btn">
-            🚪 Logout
-        </a>
-
-    </div>
-
-    <!-- Welcome -->
-    <div class="welcome-box">
-
-        <h2>Welcome Back, {{ username }} 👋</h2>
-
-        <p>
-            Ready to crack your next interview?
-        </p>
-
-    </div>
-
-    <!-- Cards -->
-    <div class="card-container">
-
-        <!-- Start Interview -->
-        <a href="{{ url_for('interview.setup') }}" class="card">
-
-            <div class="icon">🎤</div>
-
-            <h3>Start AI Interview</h3>
-
-            <p>
-                Practice with AI and improve your skills.
-            </p>
-
-        </a>
-
-        <!-- Resume -->
-        <div class="card">
-
-            <div class="icon">📄</div>
-
-            <h3>Resume Analyzer</h3>
-
-            <p>
-                Coming Soon
-            </p>
 
         </div>
 
-        <!-- History -->
-        <a href="{{ url_for('history.history') }}" class="card">
-
-            <div class="icon">📊</div>
-
-            <h3>Interview History</h3>
-
-            <p>
-                View all your previous interviews.
-            </p>
-
-        </a>
-
-        <!-- Profile -->
-        <div class="card">
-
-            <div class="icon">👤</div>
-
-            <h3>My Profile</h3>
-
-            <p>
-                Coming Soon
-            </p>
-
-        </div>
-
-    </div>
+    </main>
 
 </div>
 
-<script>
-setTimeout(() => {
-
-    const flash = document.querySelector(".flash");
-
-    if (flash) {
-
-        flash.style.transition = "all 0.5s ease";
-        flash.style.opacity = "0";
-        flash.style.transform = "translateX(40px)";
-
-        setTimeout(() => {
-            flash.remove();
-        }, 500);
-
-    }
-
-}, 3000);
-</script>
-
-</body>
-</html>
+{% endblock %}

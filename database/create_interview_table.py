@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect("database/users.db")
+connection = get_db_connection()
 
 cursor = connection.cursor()
 

@@ -1,0 +1,33 @@
+{
+  "name": "ai-interview-platform",
+  "version": "1.0.0",
+  "description": "AI Mock Interview Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch",
+    "build": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/babaxxxop-oss/AI-Interview-Platform.git"
+  },
+  "keywords": [
+    "flask",
+    "tailwindcss",
+    "python",
+    "ai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/babaxxxop-oss/AI-Interview-Platform/issues"
+  },
+  "homepage": "https://github.com/babaxxxop-oss/AI-Interview-Platform#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.19",
+    "tailwindcss": "^3.4.17"
+  }
+}

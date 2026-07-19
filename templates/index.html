@@ -9,60 +9,81 @@
 
     <title>AI Mock | Home</title>
 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Home CSS -->
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+      href="{{ url_for('static', filename='css/home.css') }}">
 
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="home-page">
 
-        <!-- Logo -->
-        <div class="logo">
+        <div class="container">
 
-            <img src="{{ url_for('static', filename='images/logo.png') }}"
-                 alt="AI Mock Logo">
+            <!-- Logo -->
+            <div class="logo">
+
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                     alt="AI Mock Logo">
+
+            </div>
+
+            <!-- Heading -->
+            <h1 class="home-title">
+                AI Mock
+            </h1>
+
+            <!-- Description -->
+            <p class="home-description">
+                Practice HR, Technical, Coding, Aptitude, and AI-powered mock interviews from one intelligent platform.
+            </p>
+
+            <p class="home-description">
+                <strong>Practice. Improve. Get Hired.</strong>
+            </p>
+
+            <!-- Start Interview -->
+            <a href="/interview">
+
+                <button class="home-btn">
+                    🚀 Start Interview
+                </button>
+
+            </a>
+
+            <br><br>
+
+            <!-- Login -->
+            <a href="/login">
+
+                <button class="home-btn">
+                    🔐 Login
+                </button>
+
+            </a>
+
+            <!-- Footer -->
+            <footer class="footer">
+
+                © 2026 AI Mock
+
+                <br><br>
+
+                Designed & Developed by
+
+                <strong>Shubham Kumar</strong> ❤️
+
+            </footer>
 
         </div>
-
-        <!-- Heading -->
-        <h1>AI Mock</h1>
-
-        <!-- Description -->
-        <p>
-            Practice HR, Technical, Coding, Aptitude and AI-powered mock interviews.
-        </p>
-
-        <p>
-            <strong>Practice. Improve. Get Hired.</strong>
-        </p>
-
-        <!-- Start Interview Button -->
-        <a href="/interview">
-
-            <button>
-                🚀 Start Interview
-            </button>
-
-        </a>
-
-        <br><br>
-
-        <!-- Login Button -->
-        <a href="/login">
-
-            <button>
-                🔐 Login
-            </button>
-
-        </a>
-
-        <!-- Footer -->
-        <footer class="footer">
-            © 2026 AI Mock • Designed & Developed by
-            <strong>Shubham Kumar</strong> ❤️
-        </footer>
 
     </div>
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, url_for, flash
-import sqlite3
 import json
+from database.db import get_db_connection
+
 
 # ==================================================
 # History Blueprint
@@ -19,7 +20,7 @@ def history():
         flash("Please login first!", "warning")
         return redirect(url_for("auth.login"))
 
-    connection = sqlite3.connect("database/users.db")
+    connection = get_db_connection()
     cursor = connection.cursor()
 
     cursor.execute("""
@@ -49,7 +50,7 @@ def interview_details(interview_id):
         flash("Please login first!", "warning")
         return redirect(url_for("auth.login"))
 
-    connection = sqlite3.connect("database/users.db")
+    connection = get_db_connection()
     cursor = connection.cursor()
 
     cursor.execute("""

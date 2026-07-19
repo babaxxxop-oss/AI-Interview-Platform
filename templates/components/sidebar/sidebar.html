@@ -1,0 +1,63 @@
+<!-- ==========================================================
+     AI Mock Premium Sidebar
+========================================================== -->
+
+<aside
+    class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col
+           overflow-hidden
+           border-r border-gray-200/80 dark:border-slate-700/70
+           bg-white/95 dark:bg-slate-900/95
+           backdrop-blur-xl
+           shadow-2xl
+           transition-all duration-300">
+
+    <!-- ==========================================
+         Decorative Background
+    =========================================== -->
+
+    <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-b from-violet-50 via-white to-white dark:from-violet-950/20 dark:via-slate-900 dark:to-slate-900">
+    </div>
+
+    <!-- Purple Glow -->
+
+    <div
+        class="pointer-events-none absolute -top-24 -left-24 h-56 w-56 rounded-full bg-violet-500/10 blur-3xl">
+    </div>
+
+    <!-- ==========================================
+         Sidebar Content
+    =========================================== -->
+
+    <div class="relative flex h-full flex-col">
+
+        <!-- Logo -->
+
+        <div class="border-b border-gray-200 dark:border-slate-800">
+
+            {% include 'components/sidebar/sidebar_logo.html' %}
+
+        </div>
+
+        <!-- Navigation -->
+
+        <div class="flex-1 overflow-y-auto custom-scrollbar">
+
+            {% include 'components/sidebar/sidebar_menu.html' %}
+
+        </div>
+
+        <!-- Upgrade Card -->
+
+        <div
+            class="border-t border-gray-200 dark:border-slate-800
+                   bg-white/70 dark:bg-slate-900/70
+                   backdrop-blur-md">
+
+            {% include 'components/sidebar/sidebar_upgrade.html' %}
+
+        </div>
+
+    </div>
+
+</aside>

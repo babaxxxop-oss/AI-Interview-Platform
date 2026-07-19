@@ -9,7 +9,7 @@ import json
 
 
 app = Flask(__name__)
-app.secret_key = "my_super_secret_key_2026"
+app.config.from_object("config.Config")
 
 
 
