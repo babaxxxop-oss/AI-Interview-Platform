@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Interview complete · AI Mock</title>
+  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/interview.css') }}">
+</head>
+<body><main class="complete-shell glass-card"><div class="complete-orb">✓</div><p class="eyebrow">SESSION SAVED</p><h1>Interview complete</h1><p>Your answers are saved in Interview History. AI scoring is not available yet, so no permanent metrics are being shown.</p><div class="complete-actions"><a class="submit-button" href="{{ url_for('main.dashboard') }}">Back to dashboard</a><a class="dashboard-link" href="{{ url_for('interview.setup') }}">Try another interview</a></div></main></body>
+</html>

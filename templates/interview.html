@@ -1,93 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AI Mock | Interview</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/interview.css') }}">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');</script>
+  <title>Nova Interview · AI Mock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/interview.css') }}">
 </head>
-
 <body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="{{ url_for('main.dashboard') }}" aria-label="Back to dashboard">
+        <span class="brand-mark"><i></i><i></i><i></i></span><span>AI Mock</span>
+      </a>
+      <div class="interview-name"><span class="live-dot"></span><span>Live interview</span><strong>{{ session.category }}</strong></div>
+      <div class="progress-cluster" aria-label="Interview progress">
+        <div class="progress-copy"><span>Question {{ question_number }} of {{ total_questions }}</span><b>{{ ((question_number / total_questions) * 100)|round|int }}%</b></div>
+        <div class="progress-track"><span style="--progress: {{ (question_number / total_questions) * 100 }}%"></span></div>
+      </div>
+      <div class="header-actions">
+        <div class="timer" aria-label="Remaining time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 7v5l3 2"></path></svg><span id="timer">10:00</span></div>
+        <span class="network-status" title="Network connected"><i></i><span>Online</span></span>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle color theme"><svg viewBox="0 0 24 24"><path d="M20.6 15.8A8.5 8.5 0 0 1 8.2 3.4 8.5 8.5 0 1 0 20.6 15.8Z"></path></svg></button>
+        <button class="icon-button desktop-only" id="fullscreenBtn" type="button" aria-label="Toggle fullscreen"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"></path></svg></button>
+        <a class="dashboard-link desktop-only" href="{{ url_for('main.dashboard') }}">Dashboard</a>
+      </div>
+    </header>
 
-<div class="container">
+    <main class="interview-grid">
+      <section class="primary-column">
+        <article class="nova-card glass-card" id="novaCard">
+          <div class="nova-head">
+            <div class="avatar-wrap" id="avatarWrap" aria-label="Nova AI, idle">
+              <div class="avatar-core"><span class="avatar-orbit"></span><span class="avatar-face"><i></i><i></i></span></div>
+              <span class="avatar-status"></span>
+            </div>
+            <div class="nova-identity"><p class="eyebrow">YOUR AI INTERVIEWER</p><h1>Nova</h1><p id="novaStatus">Ready when you are</p></div>
+            <div class="nova-actions">
+              <button class="small-control" id="listenBtn" type="button" aria-label="Replay interview question"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"></path></svg><span>Replay</span></button>
+              <button class="small-control icon-only" id="pauseVoiceBtn" type="button" aria-label="Pause Nova" disabled><svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"></path></svg></button>
+              <button class="small-control" id="muteBtn" type="button" aria-label="Mute Nova"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Z"></path><path d="m16 9 5 5m0-5-5 5"></path></svg></button>
+              <label class="speed-control" title="AI voice speed"><span>1×</span><input id="voiceSpeed" type="range" min="0.7" max="1.4" value="1" step="0.1" aria-label="AI voice speed"></label>
+            </div>
+          </div>
+          <div class="question-bubble" id="questionBubble"><span class="bubble-label">NOVA ASKS</span><h2 id="aiQuestion">{{ question }}</h2><span class="typing-caret" aria-hidden="true"></span></div>
+        </article>
 
-    <!-- Header -->
-    <div class="header">
+        <form method="POST" id="answerForm" class="answer-form">
+          <section class="response-card glass-card">
+            <div class="response-heading"><div><p class="eyebrow">LIVE TRANSCRIPT</p><h2>Your response</h2></div><div class="response-meta"><span id="recordingBadge"><i></i> Ready</span><span id="wordCount">0 words</span><span id="characterCount">0 chars</span></div></div>
+            <div class="editor-wrap"><textarea id="answer" name="answer" aria-label="Your interview answer" placeholder="Your transcript will appear here — or type your response…" required autofocus></textarea><span class="editor-hint">Editable before submission</span></div>
+            <div class="response-footer"><span id="speakingTime">0 sec · 0 WPM · English</span><div><span class="shortcut">Enter</span> to submit</div></div>
+          </section>
+          <div class="answer-actions">
+            <button class="mic-control" id="micBtn" type="button" aria-label="Start recording"><span class="mic-halo"></span><svg viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="12" rx="4"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"></path></svg></button>
+            <div class="voice-copy"><strong id="voiceStatus">Tap to start speaking</strong><span id="voiceHelper">Your microphone is off</span></div>
+            <div class="waveform" id="waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <button class="submit-button" type="submit"><span>{% if question_number == total_questions %}Finish interview{% else %}Submit &amp; continue{% endif %}</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+          </div>
+        </form>
+      </section>
 
-        <h1>🎤 AI Mock Interview</h1>
-
-        <a href="{{ url_for('main.dashboard') }}" class="back-btn">
-            ← Dashboard
-        </a>
-
-    </div>
-
-    <!-- Interview Box -->
-    <form method="POST" class="interview-box">
-
-        <!-- Interview Details -->
-        <div class="info">
-
-            <span>
-                <strong>Category:</strong>
-                {{ session.category }}
-            </span>
-
-            <span>
-                <strong>Difficulty:</strong>
-                {{ session.difficulty }}
-            </span>
-
-        </div>
-
-        <!-- Progress -->
-        <div class="progress">
-
-            Question {{ question_number }} of {{ total_questions }}
-
-        </div>
-
-        <!-- AI Question -->
-        <div class="question">
-
-            <h2>{{ question }}</h2>
-
-        </div>
-
-        <!-- User Answer -->
-        <div class="answer">
-
-            <textarea
-                name="answer"
-                rows="8"
-                placeholder="Type your answer here..."
-                required
-                autofocus
-            ></textarea>
-
-        </div>
-
-        <!-- Submit -->
-        <button class="next-btn" type="submit">
-
-            {% if question_number == total_questions %}
-                Finish Interview ✅
-            {% else %}
-                Next Question →
-            {% endif %}
-
-        </button>
-
-    </form>
-
-</div>
-
+      <aside class="insights-panel">
+        <section class="summary-card glass-card"><div class="panel-heading"><div><p class="eyebrow">INTERVIEW PULSE</p><h2>Session overview</h2></div><span class="score-ring"><b>—</b><small>score</small></span></div><div class="overview-grid"><div><span>Category</span><b>{{ session.category }}</b></div><div><span>Level</span><b>{{ session.difficulty }}</b></div><div><span>Question</span><b>{{ question_number }}/{{ total_questions }}</b></div><div><span>Remaining</span><b id="sideTimer">10:00</b></div></div></section>
+        <section class="metrics-card glass-card"><div class="panel-heading"><div><p class="eyebrow">AI SIGNALS</p><h2>Live feedback</h2></div><span class="analysis-state" id="analysisState">Waiting for AI analysis</span></div><div class="metric-list">
+          <div class="metric"><div><span>Confidence</span><b>—</b></div><span class="metric-track"><i></i></span></div>
+          <div class="metric"><div><span>Communication</span><b>—</b></div><span class="metric-track"><i></i></span></div>
+          <div class="metric"><div><span>Grammar</span><b>—</b></div><span class="metric-track"><i></i></span></div>
+          <div class="metric"><div><span>Technical clarity</span><b>—</b></div><span class="metric-track"><i></i></span></div>
+        </div></section>
+      <section class="camera-card glass-card"><div class="camera-top"><div><p class="eyebrow">CAMERA MODE</p><h2>Presence check</h2></div><button class="camera-button" id="cameraBtn" type="button">Enable camera</button></div><div class="camera-preview" id="cameraPreview"><video id="cameraFeed" autoplay muted playsinline></video><div class="camera-empty"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"></path><path d="m16 10 5-3v10l-5-3"></path></svg><span>Camera stays private until enabled</span></div><span class="camera-live" id="cameraLive">Camera on</span></div><p class="camera-note" id="cameraNote">Vision signals are ready for a future AI integration.</p></section>
+      </aside>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='js/voice.js') }}"></script>
 </body>
-
 </html>

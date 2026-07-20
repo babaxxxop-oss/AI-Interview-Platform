@@ -1,4 +1,5 @@
 import os
+import re
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -11,81 +12,89 @@ client = OpenAI(
 
 MODEL = "deepseek/deepseek-chat-v3-0324"
 
-def chat_with_ai(messages):
 
-    system_prompt = """
-You are AI Mock.
+# ==========================================================
+# Clean AI Response
+# ==========================================================
 
-You are NOT an assistant.
-You are NOT a tutor.
-You are NOT ChatGPT.
+def clean_response(text: str) -> str:
+    """
+    Remove unwanted prefixes and leaked prompt instructions.
+    """
 
-You are an experienced Senior Technical Interviewer at a top software company.
+    if not text:
+        return ""
 
-Your personality:
-- Professional
-- Serious
-- Confident
-- Calm
-- Slightly strict
-- Friendly but not overly nice
+    text = text.strip()
 
-Interview Rules:
-
-1. Conduct a REAL interview.
-2. Ask ONLY ONE question at a time.
-3. Wait for the candidate's answer.
-4. Never answer your own question.
-5. Never give hints unless explicitly requested.
-6. Never explain the correct answer during the interview.
-7. If the answer is weak, ask a follow-up question.
-8. Challenge the candidate when necessary.
-9. Remember all previous answers.
-10. Do not behave like a chatbot.
-
-Communication Style:
-
-- Keep responses short.
-- Don't use emojis.
-- Don't say "Great question!"
-- Don't say "I'm happy to help."
-- Don't act like an AI assistant.
-
-Example:
-
-Interviewer:
-"Tell me about yourself."
-
-Candidate:
-(answer)
-
-Interviewer:
-"Thank you.
-
-Explain the difference between a list and a tuple in Python."
-
-After every answer:
-- Judge silently.
-- Move naturally to the next question.
-
-Only when the interview ends:
-- Give detailed feedback.
-- Give strengths.
-- Give weaknesses.
-- Give a score out of 10.
-"""
-
-    chat_messages = [
-        {"role": "system", "content": system_prompt}
+    prefixes = [
+        "Interviewer:",
+        "Question:",
+        "Question 1:",
+        "Question 2:",
+        "Question 3:",
+        "Q1:",
+        "Q2:",
+        "Q3:",
+        "AI:",
+        "Nova:"
     ]
 
-    chat_messages.extend(messages)
+    for prefix in prefixes:
+        if text.startswith(prefix):
+            text = text[len(prefix):].strip()
 
-    response = client.chat.completions.create(
-        model=MODEL,
-        messages=chat_messages,
-        temperature=0.7,
-        max_tokens=300,
-    )
+    # Remove parenthesized instructions
+    text = re.sub(r"\(.*?\)", "", text)
 
-    return response.choices[0].message.content
+    # Remove multiple blank lines
+    text = re.sub(r"\n{2,}", "\n", text)
+
+    return text.strip()
+
+
+# ==========================================================
+# Send Request
+# ==========================================================
+
+def generate_ai_response(messages):
+    """
+    Sends messages to OpenRouter.
+
+    Parameters
+    ----------
+    messages : list
+        Fully prepared chat messages.
+
+    Returns
+    -------
+    str
+        Clean AI response.
+    """
+
+    try:
+
+        response = client.chat.completions.create(
+
+            model=MODEL,
+
+            messages=messages,
+
+            temperature=0.6,
+
+            max_tokens=350
+
+        )
+
+        ai_reply = response.choices[0].message.content
+
+        return clean_response(ai_reply)
+
+    except Exception as e:
+
+        print(e)
+
+        return (
+            "I'm sorry, I couldn't generate the next interview "
+            "question because an unexpected error occurred."
+        )

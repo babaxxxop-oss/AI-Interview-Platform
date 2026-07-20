@@ -1,218 +1,2489 @@
+/* =========================================================
+   AI MOCK - INTERVIEW PAGE
+   Part 1
+   Variables • Theme • Reset • Layout • Header
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --bg: #f8fafc;
+
+    --surface: rgba(255,255,255,.92);
+
+    --surface-strong: #ffffff;
+
+    --line: #e2e8f0;
+
+    --text: #0f172a;
+
+    --muted: #64748b;
+
+    --purple: #7c3aed;
+
+    --indigo: #6366f1;
+
+    --green: #22c55e;
+
+    --shadow: 0 12px 32px rgba(15,23,42,.08);
+
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+html.dark{
+
+    --bg:#020617;
+
+    --surface:rgba(15,23,42,.9);
+
+    --surface-strong:#0f172a;
+
+    --line:#334155;
+
+    --text:#f8fafc;
+
+    --muted:#94a3b8;
+
+    --purple:#8b5cf6;
+
+    --indigo:#6366f1;
+
+    --green:#4ade80;
+
+    --shadow:0 16px 38px rgba(0,0,0,.28);
+
+}
+
+
+/* =========================================================
+   LIGHT THEME OVERRIDES
+========================================================= */
+
+.light-theme{
+
+    --bg:#f4f5ff;
+
+    --text:#17182a;
+
+    --muted:#626987;
+
+    --line:rgba(49,54,107,.14);
+
+    --shadow:0 18px 45px rgba(58,64,123,.12);
+
+}
+
+.light-theme:before{
+
+    opacity:.18;
+
+}
+
+.light-theme:after{
+
+    opacity:.14;
+
+}
+
+.light-theme .glass-card{
+
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.92),
+        rgba(241,243,255,.82)
+    );
+
+}
+
+.light-theme .question-bubble{
+
+    background:linear-gradient(
+        115deg,
+        #8067d414,
+        #516ff90d
+    );
+
+}
+
+.light-theme .question-bubble h2,
+.light-theme .nova-identity h1,
+.light-theme .response-heading h2,
+.light-theme .panel-heading h2,
+.light-theme .camera-top h2{
+
+    color:#17182a;
+
+}
+
+.light-theme .editor-wrap textarea{
+
+    background:#ffffff;
+
+    color:#20213a;
+
+}
+
+.light-theme .dashboard-link,
+.light-theme .timer,
+.light-theme .icon-button,
+.light-theme .small-control,
+.light-theme .speed-control,
+.light-theme .camera-button{
+
+    background:#ffffffa8;
+
+    color:#38385a;
+
+}
+
+.light-theme .camera-preview{
+
+    background:#e7eaff;
+
+}
+
+.light-theme .overview-grid b,
+.light-theme .metric>div,
+.light-theme .score-ring{
+
+    color:#262748;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-    margin:0;
-    padding:0;
+
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+html,
+body{
+
+    margin:0;
+
+    min-height:100%;
+
+    overflow:hidden;
+
 }
 
 body{
 
-    min-height:100vh;
+    font-family:"DM Sans",sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-size:14px;
+
+}
+
+body::before,
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    z-index:-1;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    pointer-events:none;
+
+}
+
+body::before{
+
+    background:#49308f;
+
+    width:42vw;
+
+    height:42vw;
+
+    left:-13vw;
+
+    top:-22vw;
+
+    opacity:.55;
+
+}
+
+body::after{
+
+    background:#18378c;
+
+    width:36vw;
+
+    height:36vw;
+
+    right:-12vw;
+
+    bottom:-22vw;
+
+    opacity:.52;
+
+}
+
+
+/* =========================================================
+   APP LAYOUT
+========================================================= */
+
+.app-shell{
+
+    height:100dvh;
+
+    max-width:1780px;
+
+    margin:auto;
+
+    padding:clamp(14px,2vw,30px);
+
+    display:grid;
+
+    grid-template-rows:auto minmax(0,1fr);
+
+    gap:clamp(12px,1.7vh,22px);
+
+}
+
+.interview-grid{
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:
+
+        minmax(0,1fr)
+
+        minmax(300px,25%);
+
+    gap:clamp(14px,1.5vw,24px);
+
+}
+
+.primary-column{
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+
+        minmax(190px,.85fr)
+
+        minmax(0,1.15fr);
+
+    gap:clamp(12px,1.6vh,20px);
+
+}
+
+.glass-card{
+
+    background:linear-gradient(
+        145deg,
+        rgba(34,40,74,.84),
+        rgba(16,21,43,.72)
+    );
+
+    border:1px solid var(--line);
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(18px);
+
+}
+
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+
+.topbar{
+
+    min-height:56px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:clamp(12px,1.5vw,25px);
+
+}
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    white-space:nowrap;
+
+    font:
+
+        600
+
+        18px
+
+        "Space Grotesk",
+
+        sans-serif;
+
+}
+
+.brand-mark{
+
+    width:28px;
+
+    height:28px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:3px;
+
+    padding:5px;
+
+    border-radius:9px;
+
+    background:
+
+        linear-gradient(
+            140deg,
+            #ad8bff,
+            #606fff
+        );
+
+    box-shadow:
+
+        0 5px 18px #8d70ff70;
+
+}
+
+.brand-mark i{
+
+    width:4px;
+
+    border-radius:3px;
+
+    background:white;
+
+}
+
+.brand-mark i:nth-child(1){
+
+    height:9px;
+
+}
+
+.brand-mark i:nth-child(2){
+
+    height:16px;
+
+}
+
+.brand-mark i:nth-child(3){
+
+    height:12px;
+
+}
+
+.interview-name{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:var(--muted);
+
+    white-space:nowrap;
+
+}
+
+.interview-name strong{
+
+    padding-left:8px;
+
+    border-left:1px solid var(--line);
+
+    color:#dce0f4;
+
+    font-weight:500;
+
+}
+
+.live-dot{
+
+    width:7px;
+
+    height:7px;
+
+    background:var(--green);
+
+    border-radius:50%;
+
+    box-shadow:0 0 0 5px #4ce39a1c;
+
+    animation:pulse 2s infinite;
+
+}
+
+.progress-cluster{
+
+    width:min(28vw,420px);
+
+    margin-left:auto;
+
+}
+
+.progress-copy{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:7px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+}
+
+.progress-copy b{
+
+    color:#e8e6ff;
+
+}
+
+.progress-track{
+
+    height:5px;
+
+    overflow:hidden;
+
+    border-radius:10px;
+
+    background:#ffffff13;
+
+}
+
+.progress-track span{
+
+    display:block;
+
+    width:var(--progress);
+
+    height:100%;
+
+    border-radius:inherit;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--purple),
+            #b6a5ff
+        );
+
+    box-shadow:
+
+        0 0 10px var(--purple);
+
+    animation:grow .8s ease-out;
+
+}
+
+.header-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.timer{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:8px 10px;
+
+    border:1px solid var(--line);
+
+    border-radius:9px;
+
+    color:#e6e9ff;
+
+    font-weight:600;
+
+    font-variant-numeric:tabular-nums;
+
+}
+
+.timer svg,
+.icon-button svg,
+.small-control svg,
+.submit-button svg,
+.mic-control svg,
+.camera-empty svg{
+
+    width:17px;
+
+    height:17px;
+
+    fill:none;
+
+    stroke:currentColor;
+
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+
+    stroke-linejoin:round;
+
+}
+
+.network-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+}
+
+.network-status i{
+
+    width:6px;
+
+    height:6px;
+
+    background:var(--green);
+
+    border-radius:50%;
+
+    animation:none;
+
+}
+
+.icon-button,
+.small-control,
+.camera-button{
+
+    border:1px solid var(--line);
+
+    background:#ffffff08;
+
+    color:var(--text);
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+    font:inherit;
+
+}
+
+.icon-button{
+
+    width:36px;
+
+    height:36px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:9px;
+
+}
+
+.icon-button:hover,
+.small-control:hover{
+
+    background:#ffffff16;
+
+    transform:translateY(-1px);
+
+}
+
+.dashboard-link{
+
+    padding:10px 12px;
+
+    border-radius:9px;
+
+    background:#ffffff0c;
+
+    color:#ddd9ff;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+}
+
+/* ---------- End of Part 1 ---------- */
+
+/* =========================================================
+   PART 2A
+   NOVA CARD • AVATAR • HEADER • CONTROLS
+========================================================= */
+
+
+/* =========================================================
+   NOVA CARD
+========================================================= */
+
+.nova-card{
+
+    min-height:0;
+
+    padding:clamp(17px,2vw,27px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    overflow:hidden;
+
+}
+
+
+/* =========================================================
+   NOVA HEADER
+========================================================= */
+
+.nova-head{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar-wrap{
+
+    width:52px;
+
+    height:52px;
+
+    flex:none;
+
+    position:relative;
+
+    padding:2px;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #c4abff,
+            #5a75ff
+        );
+
+    box-shadow:
+        0 0 0 5px #9279ff15,
+        0 0 25px #7c68f884;
+
+    animation:breathe 3s ease-in-out infinite;
+
+}
+
+.avatar-core{
+
+    position:relative;
+
+    overflow:hidden;
+
+    height:100%;
+
+    border-radius:15px;
+
+    background:
+        radial-gradient(
+            circle at 50% 100%,
+            #9277ff,
+            #293d87 68%,
+            #151b42
+        );
+
+}
+
+.avatar-orbit{
+
+    position:absolute;
+
+    top:-29px;
+
+    left:-12px;
+
+    width:50px;
+
+    height:50px;
+
+    border:1px solid #ffffff52;
+
+    border-radius:50%;
+
+}
+
+.avatar-face{
+
+    position:absolute;
+
+    top:22px;
+
+    left:15px;
+
+    display:flex;
+
+    gap:6px;
+
+}
+
+.avatar-face i{
+
+    width:6px;
+
+    height:3px;
+
+    background:#f4f7ff;
+
+    border-radius:50%;
+
+    animation:blink 5s infinite;
+
+}
+
+.avatar-status{
+
+    position:absolute;
+
+    right:-2px;
+
+    bottom:-2px;
+
+    width:10px;
+
+    height:10px;
+
+    background:var(--green);
+
+    border:2px solid #20284e;
+
+    border-radius:50%;
+
+}
+
+
+/* =========================================================
+   NOVA INFO
+========================================================= */
+
+.nova-identity h1,
+.response-heading h2,
+.panel-heading h2,
+.camera-top h2{
+
+    margin:2px 0;
+
+    color:var(--text);
+
+    font:
+
+        600
+
+        clamp(16px,1.3vw,20px)
+
+        "Space Grotesk",
+
+        sans-serif;
+
+}
+
+.nova-identity p:not(.eyebrow){
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+}
+
+.eyebrow{
+
+    margin:0;
+
+    color:#9791c9 !important;
+
+    font-size:10px !important;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+}
+
+
+/* =========================================================
+   NOVA CONTROLS
+========================================================= */
+
+.nova-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    margin-left:auto;
+
+}
+
+.small-control{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    height:32px;
+
+    padding:0 9px;
+
+    border-radius:8px;
+
+    font-size:12px;
+
+}
+
+.small-control svg{
+
+    width:14px;
+
+}
+
+.speed-control{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    height:32px;
+
+    padding:0 7px;
+
+    border:1px solid var(--line);
+
+    border-radius:8px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+}
+
+.speed-control input{
+
+    width:45px;
+
+    accent-color:var(--purple);
+
+}
+
+
+/* =========================================================
+   ICON ONLY BUTTON
+========================================================= */
+
+.icon-only{
+
+    width:32px;
+
+    justify-content:center;
+
+    padding:0;
+
+}
+
+/* ---------------- END OF PART 2A ---------------- */
+
+/* =========================================================
+   PART 2B
+   QUESTION BUBBLE • RESPONSE CARD • ANSWER FORM
+========================================================= */
+
+
+/* =========================================================
+   QUESTION BUBBLE
+========================================================= */
+
+.question-bubble{
+
+    position:relative;
+
+    margin-top:clamp(16px,2.2vh,30px);
+
+    padding:
+        clamp(15px,2vw,25px)
+        clamp(18px,2.2vw,30px);
+
+    background:
+        linear-gradient(
+            115deg,
+            #7663d424,
+            #516ff91a
+        );
+
+    border:1px solid #ae9eff2c;
+
+    border-radius:4px 16px 16px 16px;
+
+}
+
+.question-bubble::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-1px;
+
+    left:-1px;
+
+    width:32px;
+
+    height:32px;
+
+    border-top:2px solid #aa92ff;
+
+    border-left:2px solid #aa92ff;
+
+    border-radius:4px 0 0;
+
+}
+
+.bubble-label{
+
+    font-size:10px;
+
+    font-weight:700;
+
+    color:#afa0ee;
+
+    letter-spacing:.12em;
+
+}
+
+.question-bubble h2{
+
+    margin:8px 0 0;
+
+    max-width:920px;
+
+    color:#f5f4ff;
+
+    font:
+        500
+        clamp(16px,1.55vw,24px)
+        /
+        1.4
+        "Space Grotesk",
+        sans-serif;
+
+}
+
+.typing-caret{
+
+    display:inline-block;
+
+    width:2px;
+
+    height:1.1em;
+
+    margin-left:3px;
+
+    background:#ae96ff;
+
+    vertical-align:-2px;
+
+    animation:blink 1s infinite;
+
+}
+
+
+/* =========================================================
+   ANSWER FORM
+========================================================= */
+
+.answer-form{
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+
+        minmax(0,1fr)
+
+        auto;
+
+    gap:12px;
+
+}
+
+
+/* =========================================================
+   RESPONSE CARD
+========================================================= */
+
+.response-card{
+
+    min-height:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:clamp(16px,1.8vw,24px);
+
+}
+
+
+/* =========================================================
+   RESPONSE HEADER
+========================================================= */
+
+.response-heading,
+.panel-heading,
+.camera-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+}
+
+.response-heading h2{
+
+    margin-top:3px;
+
+}
+
+.response-meta{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+}
+
+.response-meta span + span{
+
+    padding-left:10px;
+
+    border-left:1px solid var(--line);
+
+}
+
+#recordingBadge{
+
+    color:#aeb4cd;
+
+}
+
+.response-meta i{
+
+    display:inline-block;
+
+    width:6px;
+
+    height:6px;
+
+    margin-right:5px;
+
+    border-radius:50%;
+
+    background:currentColor;
+
+}
+
+
+/* =========================================================
+   TEXT EDITOR
+========================================================= */
+
+.editor-wrap{
+
+    position:relative;
+
+    flex:1;
+
+    min-height:0;
+
+    margin-top:15px;
+
+}
+
+.editor-wrap textarea{
+
+    width:100%;
+
+    height:100%;
+
+    min-height:88px;
+
+    resize:none;
+
+    outline:none;
+
+    padding:
+
+        16px
+
+        16px
+
+        28px;
+
+    border:1px solid #ffffff10;
+
+    border-radius:12px;
+
+    background:#070a1845;
+
+    color:var(--text);
+
+    transition:.2s;
+
+    font:
+
+        400
+        clamp(13px,1vw,15px)
+        /
+        1.6
+        "DM Sans",
+        sans-serif;
+
+}
+
+.editor-wrap textarea::placeholder{
+
+    color:#747c9d;
+
+}
+
+.editor-wrap textarea:focus{
+
+    border-color:#9c7cffaa;
+
+    box-shadow:0 0 0 3px #977cff20;
+
+}
+
+.editor-hint{
+
+    position:absolute;
+
+    right:12px;
+
+    bottom:8px;
+
+    color:#78809e;
+
+    font-size:10px;
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   RESPONSE FOOTER
+========================================================= */
+
+.response-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:10px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+}
+
+.shortcut{
+
+    padding:1px 4px;
+
+    border:1px solid #ffffff1f;
+
+    border-radius:4px;
+
+    font-size:10px;
+
+}
+
+
+/* =========================================================
+   ANSWER ACTIONS
+========================================================= */
+
+.answer-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 4px;
+
+}
+
+
+/* =========================================================
+   MICROPHONE BUTTON
+========================================================= */
+
+.mic-control{
+
+    position:relative;
+
+    display:grid;
+
+    place-items:center;
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    color:#ffffff;
+
+    background:
+        linear-gradient(
+            140deg,
+            #ad8bff,
+            #6275ff
+        );
+
+    box-shadow:
+        0 10px 25px #7564ff55;
+
+    transition:.25s;
+
+}
+
+.mic-control:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.mic-control svg{
+
+    position:relative;
+
+    width:21px;
+
+}
+
+.mic-halo{
+
+    position:absolute;
+
+    inset:-5px;
+
+    opacity:0;
+
+    border-radius:18px;
+
+    border:1px solid #a68aff80;
+
+}
+
+
+/* =========================================================
+   VOICE STATUS
+========================================================= */
+
+.voice-copy{
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:145px;
+
+}
+
+.voice-copy strong{
+
+    font-size:13px;
+
+}
+
+.voice-copy span{
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+}
+
+
+/* =========================================================
+   WAVEFORM
+========================================================= */
+
+.waveform{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:3px;
+
+    height:32px;
+
+    margin-left:auto;
+
+}
+
+.waveform i{
+
+    width:3px;
+
+    height:7px;
+
+    border-radius:5px;
+
+    background:#8b83b5;
+
+    transition:height .08s;
+
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.submit-button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-left:8px;
+
+    min-height:44px;
+
+    padding:0 15px;
+
+    border:none;
+
+    border-radius:11px;
+
+    cursor:pointer;
+
+    color:#ffffff;
+
+    background:
+        linear-gradient(
+            100deg,
+            #856afa,
+            #5878ff
+        );
+
+    box-shadow:
+        0 9px 25px #5d70ff43;
+
+    transition:.2s;
+
+    font:
+
+        600
+        13px
+        "DM Sans";
+
+}
+
+.submit-button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 28px #5d70ff6b;
+
+}
+
+.submit-button svg{
+
+    width:16px;
+
+}
+
+/* ---------------- END OF PART 2B ---------------- */
+
+/* =========================================================
+   PART 3A
+   SIDEBAR • SUMMARY • METRICS • CAMERA
+========================================================= */
+
+
+/* =========================================================
+   SIDEBAR LAYOUT
+========================================================= */
+
+.insights-panel{
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+
+        auto
+        minmax(0,1fr)
+        auto;
+
+    gap:clamp(12px,1.5vh,18px);
+
+}
+
+.summary-card,
+.metrics-card,
+.camera-card{
+
+    padding:clamp(15px,1.5vw,21px);
+
+    overflow:hidden;
+
+}
+
+
+/* =========================================================
+   SCORE RING
+========================================================= */
+
+.score-ring{
+
+    width:47px;
+
+    height:47px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:4px solid #ffffff12;
+
+    border-top-color:#9176ff;
+
+    color:#f3f1ff;
+
+}
+
+.score-ring b{
+
+    font-size:15px;
+
+    line-height:12px;
+
+}
+
+.score-ring small{
+
+    color:var(--muted);
+
+    font-size:8px;
+
+}
+
+
+/* =========================================================
+   SESSION OVERVIEW GRID
+========================================================= */
+
+.overview-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    margin-top:16px;
+
+    border-top:1px solid var(--line);
+
+    border-left:1px solid var(--line);
+
+}
+
+.overview-grid div{
+
+    min-width:0;
+
+    padding:10px;
+
+    border-right:1px solid var(--line);
+
+    border-bottom:1px solid var(--line);
+
+}
+
+.overview-grid span{
+
+    display:block;
+
+    margin-bottom:3px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+}
+
+.overview-grid b{
+
+    display:block;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+    color:#e8eaff;
+
+    font-size:12px;
+
+}
+
+
+/* =========================================================
+   METRICS PANEL
+========================================================= */
+
+.metrics-card{
+
+    min-height:0;
+
+}
+
+.analysis-state{
+
+    max-width:100px;
+
+    text-align:right;
+
+    line-height:1.25;
+
+    color:#a8a2cf;
+
+    font-size:10px;
+
+}
+
+.metric-list{
+
+    display:grid;
+
+    gap:clamp(12px,2vh,20px);
+
+    margin-top:clamp(14px,2.5vh,25px);
+
+}
+
+.metric > div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:7px;
+
+    color:#d9dced;
+
+    font-size:12px;
+
+}
+
+.metric > div b{
+
+    color:#8d95b2;
+
+    font-size:11px;
+
+}
+
+.metric-track{
+
+    display:block;
+
+    height:5px;
+
+    border-radius:5px;
+
+    background:#ffffff0d;
+
+}
+
+.metric-track i{
+
+    display:block;
+
+    width:0;
+
+    height:100%;
+
+    border-radius:inherit;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #a080ff,
+            #6980ff
+        );
+
+    transition:width .4s;
+
+}
+
+
+/* =========================================================
+   CAMERA PANEL
+========================================================= */
+
+.camera-top{
+
+    align-items:center;
+
+}
+
+.camera-button{
+
+    padding:7px 9px;
+
+    border-radius:7px;
+
+    color:#d8d4ff;
+
+    font-size:10px;
+
+    white-space:nowrap;
+
+}
+
+.camera-button:hover{
+
+    border-color:#9c7cff;
+
+    background:#9175ff20;
+
+}
+
+
+/* =========================================================
+   CAMERA PREVIEW
+========================================================= */
+
+.camera-preview{
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-top:13px;
+
+    height:clamp(50px,7.4vh,88px);
+
+    border:1px solid #ffffff0c;
+
+    border-radius:10px;
+
+    background:#080c1e;
+
+}
+
+.camera-preview video{
+
+    display:none;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.camera-empty{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    height:100%;
+
+    color:#737b9e;
+
+    font-size:10px;
+
+}
+
+.camera-empty svg{
+
+    width:17px;
+
+}
+
+.camera-note{
+
+    margin:8px 0 0;
+
+    color:#8189aa;
+
+    line-height:1.35;
+
+    font-size:10px;
+
+}
+
+
+/* =========================================================
+   CAMERA LIVE BADGE
+========================================================= */
+
+.camera-live{
+
+    display:none;
+
+    position:absolute;
+
+    top:7px;
+
+    left:7px;
+
+    padding:3px 6px;
+
+    border-radius:999px;
+
+    background:#0f172ab8;
+
+    color:#ffffff;
+
+    font-size:9px;
+
+}
+
+.camera-live::before{
+
+    content:"";
+
+    display:inline-block;
+
+    width:5px;
+
+    height:5px;
+
+    margin-right:4px;
+
+    border-radius:50%;
+
+    background:#4ade80;
+
+}
+
+.camera-preview.is-active .camera-live{
+
+    display:block;
+
+}
+
+/* ---------------- END OF PART 3A ---------------- */
+
+/* =========================================================
+   PART 3B
+   RECORDING STATES • ANIMATIONS • RESPONSIVE • COMPLETE PAGE
+========================================================= */
+
+
+/* =========================================================
+   RECORDING STATES
+========================================================= */
+
+.is-recording .mic-control{
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff647d,
+            #e4466a
+        );
+
+    box-shadow:
+        0 0 0 7px #ff547921,
+        0 10px 25px #ff547955;
+
+}
+
+.is-recording .mic-halo{
+
+    animation:mic-pulse 1.5s infinite;
+
+}
+
+.is-recording #recordingBadge{
+
+    color:#ff7990;
+
+}
+
+.is-recording .avatar-wrap{
+
+    animation:breathe .9s ease-in-out infinite;
+
+}
+
+
+/* =========================================================
+   AI THINKING STATE
+========================================================= */
+
+.is-thinking .question-bubble{
+
+    filter:blur(2px);
+
+    opacity:.5;
+
+}
+
+.is-thinking .question-bubble::after{
+
+    content:"Nova is thinking · · ·";
+
+    position:absolute;
+
+    inset:0;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#ffffff;
+
+    font-size:14px;
+
+    background:#151a3599;
+
+}
+
+
+/* =========================================================
+   TIMER STATES
+========================================================= */
+
+.timer.is-warning{
+
+    color:#f59e0b;
+
+}
+
+.timer.is-critical{
+
+    color:#fb7185;
+
+    animation:timer-pulse 1s infinite;
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes pulse{
+
+    50%{
+
+        box-shadow:0 0 0 8px #4ce39a00;
+
+    }
+
+}
+
+@keyframes grow{
+
+    from{
+
+        width:0;
+
+    }
+
+}
+
+@keyframes breathe{
+
+    50%{
+
+        transform:scale(1.05);
+
+        box-shadow:
+            0 0 0 8px #9279ff18,
+            0 0 32px #7c68f8a0;
+
+    }
+
+}
+
+@keyframes blink{
+
+    0%,
+    46%,
+    48%,
+    100%{
+
+        transform:scaleY(1);
+
+    }
+
+    47%{
+
+        transform:scaleY(.1);
+
+    }
+
+}
+
+@keyframes mic-pulse{
+
+    0%{
+
+        opacity:.9;
+
+        transform:scale(.85);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:scale(1.35);
+
+    }
+
+}
+
+@keyframes timer-pulse{
+
+    50%{
+
+        box-shadow:0 0 0 4px #fb718529;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width:1100px){
+
+    .interview-grid{
+
+        grid-template-columns:minmax(0,1fr) 270px;
+
+    }
+
+    .network-status span,
+    .dashboard-link{
+
+        display:none;
+
+    }
+
+    .response-meta span:nth-last-child(-n+2){
+
+        display:none;
+
+    }
+
+    .camera-note{
+
+        display:none;
+
+    }
+
+}
+
+@media (max-width:780px){
+
+    html,
+    body{
+
+        overflow:auto;
+
+    }
+
+    .app-shell{
+
+        height:auto;
+
+        min-height:100dvh;
+
+    }
+
+    .interview-name,
+    .progress-cluster,
+    .desktop-only,
+    .speed-control{
+
+        display:none;
+
+    }
+
+    .topbar{
+
+        justify-content:space-between;
+
+    }
+
+    .header-actions{
+
+        margin-left:auto;
+
+    }
+
+    .interview-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .primary-column{
+
+        grid-template-rows:auto auto;
+
+    }
+
+    .nova-card{
+
+        min-height:205px;
+
+    }
+
+    .answer-form{
+
+        min-height:350px;
+
+    }
+
+    .insights-panel{
+
+        grid-template-columns:1fr 1fr;
+
+        grid-template-rows:auto auto;
+
+    }
+
+    .metrics-card{
+
+        grid-row:span 2;
+
+    }
+
+    .camera-card{
+
+        display:none;
+
+    }
+
+}
+
+@media (max-width:520px){
+
+    .app-shell{
+
+        padding:12px;
+
+    }
+
+    .nova-actions .small-control span{
+
+        display:none;
+
+    }
+
+    .nova-head{
+
+        align-items:flex-start;
+
+    }
+
+    .nova-actions{
+
+        gap:4px;
+
+    }
+
+    .question-bubble h2{
+
+        font-size:17px;
+
+    }
+
+    .answer-actions{
+
+        gap:8px;
+
+    }
+
+    .voice-copy{
+
+        min-width:0;
+
+    }
+
+    .voice-copy span,
+    .waveform{
+
+        display:none;
+
+    }
+
+    .submit-button span{
+
+        display:none;
+
+    }
+
+    .submit-button{
+
+        width:46px;
+
+        padding:0;
+
+        justify-content:center;
+
+    }
+
+    .insights-panel{
+
+        display:block;
+
+    }
+
+    .insights-panel .glass-card{
+
+        margin-top:12px;
+
+    }
+
+    .metrics-card,
+    .camera-card{
+
+        display:none;
+
+    }
+
+    .response-meta{
+
+        gap:6px;
+
+    }
+
+    .response-meta span + span{
+
+        padding-left:6px;
+
+    }
+
+    .response-footer{
+
+        font-size:10px;
+
+    }
+
+}
+
+@media (prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        transition-duration:.01ms !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   LIGHT MODE HELPERS
+========================================================= */
+
+html:not(.dark)::before{
+
+    opacity:.08;
+
+}
+
+html:not(.dark)::after{
+
+    opacity:.06;
+
+}
+
+html:not(.dark) .glass-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.96),
+            rgba(248,250,252,.92)
+        );
+
+}
+
+html:not(.dark) .question-bubble{
+
+    background:
+        linear-gradient(
+            115deg,
+            #7c3aed10,
+            #6366f10d
+        );
+
+}
+
+html:not(.dark) .question-bubble h2,
+html:not(.dark) .nova-identity h1,
+html:not(.dark) .response-heading h2,
+html:not(.dark) .panel-heading h2,
+html:not(.dark) .camera-top h2{
+
+    color:#0f172a;
+
+}
+
+html:not(.dark) .editor-wrap textarea{
+
+    background:#ffffff;
+
+    color:#0f172a;
+
+}
+
+html:not(.dark) .dashboard-link,
+html:not(.dark) .timer,
+html:not(.dark) .icon-button,
+html:not(.dark) .small-control,
+html:not(.dark) .speed-control,
+html:not(.dark) .camera-button{
+
+    background:#ffffff;
+
+    color:#334155;
+
+}
+
+html:not(.dark) .camera-preview{
+
+    background:#f1f5f9;
+
+}
+
+html:not(.dark) .overview-grid b,
+html:not(.dark) .metric > div,
+html:not(.dark) .score-ring{
+
+    color:#1e293b;
+
+}
+
+
+/* =========================================================
+   INTERVIEW COMPLETE PAGE
+========================================================= */
+
+.complete-shell{
+
+    width:min(600px,calc(100% - 32px));
+
+    margin:15vh auto;
+
+    padding:48px;
+
+    text-align:center;
+
+}
+
+.complete-orb{
+
+    display:grid;
+
+    place-items:center;
+
+    width:64px;
+
+    height:64px;
+
+    margin:auto;
+
+    border-radius:22px;
+
+    color:#ffffff;
+
+    font-size:30px;
+
+    background:
+        linear-gradient(
+            140deg,
+            #8b5cf6,
+            #6366f1
+        );
+
+    box-shadow:
+        0 15px 30px #7c3aed40;
+
+}
+
+.complete-shell h1{
+
+    margin:10px 0;
+
+    font:
+        600
+        clamp(30px,5vw,48px)
+        "Space Grotesk",
+        sans-serif;
+
+}
+
+.complete-shell p:not(.eyebrow){
+
+    color:var(--muted);
+
+    line-height:1.7;
+
+}
+
+.complete-actions{
 
     display:flex;
 
     justify-content:center;
 
-    align-items:center;
+    gap:12px;
 
-    background:linear-gradient(135deg,#4f46e5,#7c3aed);
-
-    padding:40px;
+    margin-top:28px;
 
 }
 
-.container{
-
-    width:100%;
-
-    max-width:900px;
-
-}
-
-.header{
+.complete-actions .dashboard-link{
 
     display:flex;
 
-    justify-content:space-between;
-
     align-items:center;
 
-    margin-bottom:30px;
-
-    color:white;
-
 }
 
-.header h1{
-
-    font-size:35px;
-
-}
-
-.back-btn{
-
-    text-decoration:none;
-
-    background:white;
-
-    color:#4f46e5;
-
-    padding:12px 22px;
-
-    border-radius:10px;
-
-    font-weight:bold;
-
-    transition:.3s;
-
-}
-
-.back-btn:hover{
-
-    transform:translateY(-2px);
-
-}
-
-.interview-box{
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:40px;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.2);
-
-}
-
-.info{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:25px;
-
-    color:#666;
-
-    font-weight:bold;
-
-}
-
-.progress{
-
-    background:#ede9fe;
-
-    color:#5b21b6;
-
-    display:inline-block;
-
-    padding:8px 18px;
-
-    border-radius:30px;
-
-    font-weight:bold;
-
-    margin-bottom:25px;
-
-}
-
-.question h2{
-
-    font-size:30px;
-
-    margin-bottom:25px;
-
-    color:#222;
-
-    line-height:1.4;
-
-}
-
-textarea{
-
-    width:100%;
-
-    height:220px;
-
-    resize:none;
-
-    padding:20px;
-
-    border-radius:12px;
-
-    border:2px solid #ddd;
-
-    font-size:17px;
-
-    outline:none;
-
-    transition:.3s;
-
-}
-
-textarea:focus{
-
-    border-color:#6d28d9;
-
-}
-
-.next-btn{
-
-    margin-top:30px;
-
-    width:100%;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#6d28d9;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.next-btn:hover{
-
-    background:#5b21b6;
-
-    transform:translateY(-2px);
-
-}
-
-@media(max-width:768px){
-
-    .header{
-
-        flex-direction:column;
-
-        gap:20px;
-
-    }
-
-    .info{
-
-        flex-direction:column;
-
-        gap:10px;
-
-    }
-
-    .question h2{
-
-        font-size:24px;
-
-    }
-
-}
+/* ===================== END OF CSS ===================== */
