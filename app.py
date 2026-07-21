@@ -3,6 +3,7 @@ from routes.main import main_bp
 from routes.auth import auth_bp
 from routes.interview import interview_bp
 from routes.history import history_bp
+from routes.founder import founder_bp
 import sqlite3
 import json
 
@@ -21,7 +22,7 @@ app.register_blueprint(main_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(interview_bp)
 app.register_blueprint(history_bp)
-
+app.register_blueprint(founder_bp)
 
 
 print("\n===== REGISTERED ROUTES =====")

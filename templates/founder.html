@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Founder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white flex flex-col items-center justify-center min-h-screen">
+
+    <img
+        src="{{ url_for('static', filename='images/founder.jpg') }}"
+        alt="Founder"
+        class="w-56 h-56 rounded-full object-cover border-4 border-violet-500 shadow-2xl">
+
+    <h1 class="text-4xl font-bold mt-8">
+        Shubham Kumar
+    </h1>
+
+    <p class="text-slate-400 mt-2 text-lg">
+        Founder & Developer of AI Mock
+    </p>
+
+    <a href="{{ url_for('main.dashboard') }}"
+       class="mt-8 px-6 py-3 rounded-xl bg-violet-600 hover:bg-violet-700">
+        ← Back to Dashboard
+    </a>
+
+</body>
+
+</html>
